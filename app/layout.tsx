@@ -27,6 +27,18 @@ const instrumentSerif = Instrument_Serif({
 export const metadata: Metadata = {
   title: "SpendMRR — Spend Someone's MRR",
   description: "Pick a startup, spend their MRR on stuff, and share the receipt",
+  metadataBase: new URL("https://spendmrr.vercel.app"),
+  openGraph: {
+    title: "SpendMRR — Spend Someone's MRR",
+    description: "Pick a startup, spend their MRR on stuff, and share the receipt",
+    siteName: "SpendMRR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SpendMRR — Spend Someone's MRR",
+    description: "Pick a startup, spend their MRR on stuff, and share the receipt",
+  },
 };
 
 export default function RootLayout({

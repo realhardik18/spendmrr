@@ -30,21 +30,24 @@ type ShopItem = {
 type CartItem = ShopItem & { qty: number };
 
 const SHOP_ITEMS: ShopItem[] = [
-  { id: "starbucks", name: "Starbucks Coffee", price: 700, image: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/800px-Starbucks_Corporation_Logo_2011.svg.png", bg: "#f0fdf4" },
-  { id: "domain", name: ".com Domain", price: 1200, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Unofficial_render_of_the_Chromium_logo.svg/1024px-Unofficial_render_of_the_Chromium_logo.svg.png", bg: "#eff6ff" },
-  { id: "spotify", name: "Spotify Premium", price: 1200, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1024px-Spotify_icon.svg.png", bg: "#f0fdf4" },
-  { id: "copilot", name: "GitHub Copilot", price: 1900, image: "https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png", bg: "#f5f3ff" },
-  { id: "chatgpt", name: "ChatGPT Plus", price: 2000, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png", bg: "#f0fdfa" },
-  { id: "netflix", name: "Netflix Premium", price: 2300, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Netflix_2015_N_logo.svg/1024px-Netflix_2015_N_logo.svg.png", bg: "#fef2f2" },
-  { id: "uber-eats", name: "Uber Eats Order", price: 3500, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Uber_logo_2018.png/800px-Uber_logo_2018.png", bg: "#fefce8" },
-  { id: "claude", name: "Claude Max", price: 20000, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Claude_AI_logo.svg/1024px-Claude_AI_logo.svg.png", bg: "#fff7ed" },
-  { id: "airpods", name: "AirPods Pro", price: 24900, image: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-pro-2-hero-select-202409_FMT_WHH?wid=400&hei=400&fmt=png-alpha", bg: "#f8fafc" },
-  { id: "ps5", name: "PlayStation 5", price: 49900, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/PS5_logo_2020.svg/1024px-PS5_logo_2020.svg.png", bg: "#eff6ff" },
-  { id: "mac-mini", name: "Mac Mini", price: 59900, image: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/mac-mini-hero-202411_FMT_WHH?wid=400&hei=400&fmt=png-alpha", bg: "#f4f4f5" },
-  { id: "iphone", name: "iPhone 16 Pro", price: 119900, image: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-16-pro-hero-desert-202409_FMT_WHH?wid=400&hei=400&fmt=png-alpha", bg: "#faf5ff" },
-  { id: "macbook", name: "MacBook Pro", price: 249900, image: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/mbp-14-m4-pro-space-black-select-202411_FMT_WHH?wid=400&hei=400&fmt=png-alpha", bg: "#f4f4f5" },
-  { id: "rolex", name: "Rolex Submariner", price: 1000000, image: "https://upload.wikimedia.org/wikipedia/en/thumb/9/95/Rolex_logo.svg/800px-Rolex_logo.svg.png", bg: "#fefce8" },
-  { id: "tesla", name: "Tesla Model 3", price: 3500000, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Tesla_logo.png/800px-Tesla_logo.png", bg: "#fef2f2" },
+  // Row 1 — cheap
+  { id: "starbucks", name: "Starbucks Coffee", price: 700, image: "/images/starbucks.jpeg", bg: "#f0fdf4" },
+  { id: "waymo", name: "Waymo Ride", price: 2500, image: "/images/waymo.jpeg", bg: "#eff6ff" },
+  { id: "uber-eats", name: "Uber Eats Order", price: 3500, image: "/images/uber-eats.jpeg", bg: "#fefce8" },
+  { id: "supabase", name: "Supabase Pro", price: 2500, image: "/images/supabase.svg", bg: "#f0fdf4" },
+  { id: "ai-domain", name: ".ai Domain", price: 7000, image: "/images/ai-domain.jpeg", bg: "#eff6ff" },
+  // Row 2 — mid
+  { id: "keyboard", name: "Mech Keyboard", price: 17500, image: "/images/keyboard.webp", bg: "#f4f4f5" },
+  { id: "claude", name: "Claude Max", price: 20000, image: "/images/claude-max.png", bg: "#fff7ed" },
+  { id: "airpods", name: "AirPods Pro", price: 24900, image: "/images/airpods.jpeg", bg: "#f8fafc" },
+  { id: "mac-mini", name: "Mac Mini", price: 59900, image: "/images/mac_mini.jpg", bg: "#f4f4f5" },
+  { id: "dual-monitors", name: "Dual Monitor Setup", price: 80000, image: "/images/dual-monitor.webp", bg: "#f8fafc" },
+  // Row 3 — expensive
+  { id: "iphone", name: "iPhone 16 Pro", price: 119900, image: "/images/iphone-17.jpeg", bg: "#faf5ff" },
+  { id: "macbook", name: "MacBook Pro", price: 249900, image: "/images/macbook.png", bg: "#f4f4f5" },
+  { id: "tesla", name: "Tesla Model 3", price: 3500000, image: "/images/tesla.jpeg", bg: "#fef2f2" },
+  { id: "h100", name: "NVIDIA H100", price: 3000000, image: "/images/h100.jpeg", bg: "#f0fdf4" },
+  { id: "rolex", name: "Rolex Submariner", price: 1000000, image: "/images/rolex.webp", bg: "#fefce8" },
 ];
 
 function centsToUSD(cents: number): string {
@@ -389,9 +392,9 @@ export default function SpendPage({ params }: { params: Promise<{ slug: string }
             const canAfford = item.price <= remaining;
             return (
               <div key={item.id} className="flex flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white transition-shadow hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900">
-                <div className="flex h-32 items-center justify-center p-4 sm:h-40" style={{ background: item.bg }}>
+                <div className="h-32 overflow-hidden sm:h-40" style={{ background: item.bg }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={item.image} alt={item.name} className="h-16 w-16 object-contain sm:h-20 sm:w-20" />
+                  <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
                 </div>
                 <div className="flex flex-1 flex-col p-3 text-center">
                   <div className="text-xs font-semibold leading-tight text-zinc-900 sm:text-sm dark:text-zinc-100">{item.name}</div>

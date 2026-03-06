@@ -11,12 +11,23 @@ type StartupDetail = {
   description: string | null;
   website: string | null;
   country: string | null;
+  foundedDate: string | null;
   category: string | null;
+  paymentProvider: string;
+  targetAudience: string | null;
   revenue: { last30Days: number; mrr: number; total: number };
   customers: number;
   activeSubscriptions: number;
+  askingPrice: number | null;
+  profitMarginLast30Days: number | null;
   growth30d: number | null;
+  multiple: number | null;
+  onSale: boolean;
   xHandle: string | null;
+  xFollowerCount: number | null;
+  isMerchantOfRecord: boolean;
+  techStack: { slug: string; category: string }[];
+  cofounders: { xHandle: string; xName: string | null }[];
 };
 
 type ShopItem = {
@@ -50,20 +61,19 @@ const SHOP_ITEMS: ShopItem[] = [
   { id: "rolex", name: "Rolex Submariner", price: 1000000, image: "/images/rolex.webp", bg: "#fefce8" },
 ];
 
-function centsToUSD(cents: number): string {
-  return (cents / 100).toFixed(2);
+function formatUSD(val: number): string {
+  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(val);
 }
 
-function centsToUSDShort(cents: number): string {
-  const val = cents / 100;
+function formatUSDShort(val: number): string {
   if (val >= 1000) {
     return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0, maximumFractionDigits: val >= 10000 ? 0 : 1, notation: "compact" }).format(val);
   }
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(val);
 }
 
-function centsToUSDFull(cents: number): string {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(cents / 100);
+function formatUSDFull(val: number): string {
+  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(val);
 }
 
 function useAnimatedNumber(target: number, duration = 400) {
@@ -171,7 +181,7 @@ export default function SpendPage({ params }: { params: Promise<{ slug: string }
       const blob = await (await fetch(url)).blob();
       const file = new File([blob], "spendmrr-receipt.png", { type: "image/png" });
       if (navigator.share && navigator.canShare({ files: [file] })) {
-        await navigator.share({ files: [file], title: "SpendMRR", text: `How I'd spend ${startup?.name}'s MRR` });
+        await navigator.share({ files: [file], title: "SpendMRR", text: `How I'd spend ${startup?.name}'s ${formatUSDFull(budget)} MRR` });
       } else { downloadReceipt(); }
     } catch { downloadReceipt(); }
   };
@@ -246,7 +256,9 @@ export default function SpendPage({ params }: { params: Promise<{ slug: string }
             {/* Store info */}
             <div style={{ textAlign: "center", fontSize: 13, color: "#555" }}>
               <div style={{ fontWeight: 700, fontSize: 16, color: "#1a1a1a" }}>{startup.name}</div>
-              <div>Verified MRR: {centsToUSDFull(budget)}</div>
+              {startup.category && <div style={{ fontSize: 11, textTransform: "uppercase" as const, letterSpacing: 1, color: "#888" }}>{startup.category}</div>}
+              <div style={{ marginTop: 4 }}>MRR: {formatUSDFull(budget)}</div>
+              {startup.customers > 0 && <div>{startup.customers.toLocaleString()} customers</div>}
               <div style={{ marginTop: 4, fontSize: 12 }}>
                 {dateStr} {timeStr}
               </div>
@@ -267,11 +279,11 @@ export default function SpendPage({ params }: { params: Promise<{ slug: string }
               <div key={item.id} style={{ marginBottom: 4 }}>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                   <span>{item.name}</span>
-                  <span style={{ fontWeight: 700 }}>${centsToUSD(item.price * item.qty)}</span>
+                  <span style={{ fontWeight: 700 }}>{formatUSD(item.price * item.qty)}</span>
                 </div>
                 {item.qty > 1 && (
                   <div style={{ fontSize: 11, color: "#888", paddingLeft: 8 }}>
-                    {item.qty} x ${centsToUSD(item.price)}
+                    {item.qty} x {formatUSD(item.price)}
                   </div>
                 )}
               </div>
@@ -282,7 +294,7 @@ export default function SpendPage({ params }: { params: Promise<{ slug: string }
             {/* Subtotal */}
             <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12 }}>
               <span>SUBTOTAL</span>
-              <span>${centsToUSD(cartTotal)}</span>
+              <span>{formatUSD(cartTotal)}</span>
             </div>
             <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: "#888" }}>
               <span>TAX</span>
@@ -294,7 +306,7 @@ export default function SpendPage({ params }: { params: Promise<{ slug: string }
             {/* Total */}
             <div style={{ display: "flex", justifyContent: "space-between", fontSize: 20, fontWeight: 700 }}>
               <span>TOTAL</span>
-              <span>${centsToUSD(cartTotal)}</span>
+              <span>{formatUSD(cartTotal)}</span>
             </div>
 
             <div style={{ borderTop: "2px dashed #ccc", margin: "10px 0" }} />
@@ -306,12 +318,12 @@ export default function SpendPage({ params }: { params: Promise<{ slug: string }
                 <span>MRR</span>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span>MRR CHARGED</span>
-                <span>${centsToUSD(cartTotal)}</span>
+                <span>CHARGED</span>
+                <span>{formatUSD(cartTotal)}</span>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span>MRR REMAINING</span>
-                <span>${centsToUSD(remaining)}</span>
+                <span>REMAINING</span>
+                <span>{formatUSD(remaining)}</span>
               </div>
             </div>
 
@@ -369,14 +381,14 @@ export default function SpendPage({ params }: { params: Promise<{ slug: string }
           </button>
           <div className="text-center">
             <div className="font-[family-name:var(--font-space-grotesk)] text-4xl font-bold tabular-nums tracking-tight text-white sm:text-5xl">
-              {centsToUSDFull(animatedRemaining)}
+              {formatUSDFull(animatedRemaining)}
             </div>
           </div>
           <div className="flex items-center gap-2.5">
             {startup.icon && <img src={startup.icon} alt="" className="h-8 w-8 rounded-xl" />}
             <div className="hidden text-right text-sm sm:block">
               <div className="font-semibold text-white">{startup.name}</div>
-              <div className="text-xs text-emerald-200">{centsToUSDFull(budget)} MRR</div>
+              <div className="text-xs text-emerald-200">{formatUSDFull(budget)} MRR</div>
             </div>
           </div>
         </div>
@@ -398,7 +410,7 @@ export default function SpendPage({ params }: { params: Promise<{ slug: string }
                 </div>
                 <div className="flex flex-1 flex-col p-3 text-center">
                   <div className="text-xs font-semibold leading-tight text-zinc-900 sm:text-sm dark:text-zinc-100">{item.name}</div>
-                  <div className="font-[family-name:var(--font-space-grotesk)] text-lg font-bold text-emerald-600">{centsToUSDShort(item.price)}</div>
+                  <div className="font-[family-name:var(--font-space-grotesk)] text-lg font-bold text-emerald-600">{formatUSDShort(item.price)}</div>
                   <div className="mt-auto flex items-center gap-1 pt-3">
                     <button
                       onClick={() => removeFromCart(item.id)}

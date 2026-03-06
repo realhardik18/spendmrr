@@ -16,8 +16,7 @@ type Startup = {
   xHandle: string | null;
 };
 
-function centsToUSDShort(cents: number): string {
-  const val = cents / 100;
+function formatUSDShort(val: number): string {
   if (val >= 1000) {
     return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0, maximumFractionDigits: val >= 10000 ? 0 : 1, notation: "compact" }).format(val);
   }
@@ -46,7 +45,7 @@ function StartupCard({ s, onClick }: { s: Startup; onClick: () => void }) {
         {s.category && <div className="truncate text-xs text-zinc-400">{s.category}</div>}
       </div>
       <div className="shrink-0 text-right">
-        <div className="font-[family-name:var(--font-space-grotesk)] text-base font-bold text-emerald-600">{centsToUSDShort(s.revenue.mrr)}</div>
+        <div className="font-[family-name:var(--font-space-grotesk)] text-base font-bold text-emerald-600">{formatUSDShort(s.revenue.mrr)}</div>
         <div className="text-[10px] font-medium uppercase tracking-wider text-zinc-400">/mo</div>
       </div>
     </button>
@@ -192,7 +191,7 @@ export default function Home() {
                       {s.category && <span className="text-xs text-zinc-400">{s.category}</span>}
                     </div>
                     <div className="text-right">
-                      <div className="font-[family-name:var(--font-space-grotesk)] text-base font-bold text-emerald-600">{centsToUSDShort(s.revenue.mrr)}</div>
+                      <div className="font-[family-name:var(--font-space-grotesk)] text-base font-bold text-emerald-600">{formatUSDShort(s.revenue.mrr)}</div>
                       <div className="text-[10px] font-medium uppercase tracking-wider text-zinc-400">/mo</div>
                     </div>
                     <CaretRight className="h-4 w-4 shrink-0 text-zinc-300 transition group-hover:text-emerald-500" weight="bold" />

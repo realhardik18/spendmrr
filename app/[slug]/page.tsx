@@ -42,23 +42,23 @@ type CartItem = ShopItem & { qty: number };
 
 const SHOP_ITEMS: ShopItem[] = [
   // Row 1 — cheap
-  { id: "starbucks", name: "Starbucks Coffee", price: 700, image: "/images/starbucks.jpeg", bg: "#f0fdf4" },
-  { id: "waymo", name: "Waymo Ride", price: 2500, image: "/images/waymo.jpeg", bg: "#eff6ff" },
-  { id: "uber-eats", name: "Uber Eats Order", price: 3500, image: "/images/uber-eats.jpeg", bg: "#fefce8" },
-  { id: "supabase", name: "Supabase Pro", price: 2500, image: "/images/supabase.svg", bg: "#f0fdf4" },
-  { id: "ai-domain", name: ".ai Domain", price: 7000, image: "/images/ai-domain.jpeg", bg: "#eff6ff" },
+  { id: "starbucks", name: "Starbucks Coffee", price: 7, image: "/images/starbucks.jpeg", bg: "#f0fdf4" },
+  { id: "waymo", name: "Waymo Ride", price: 25, image: "/images/waymo.jpeg", bg: "#eff6ff" },
+  { id: "uber-eats", name: "Uber Eats Order", price: 35, image: "/images/uber-eats.jpeg", bg: "#fefce8" },
+  { id: "supabase", name: "Supabase Pro", price: 25, image: "/images/supabase.svg", bg: "#f0fdf4" },
+  { id: "ai-domain", name: ".ai Domain", price: 70, image: "/images/ai-domain.jpeg", bg: "#eff6ff" },
   // Row 2 — mid
-  { id: "keyboard", name: "Mech Keyboard", price: 17500, image: "/images/keyboard.webp", bg: "#f4f4f5" },
-  { id: "claude", name: "Claude Max", price: 20000, image: "/images/claude-max.png", bg: "#fff7ed" },
-  { id: "airpods", name: "AirPods Pro", price: 24900, image: "/images/airpods.jpeg", bg: "#f8fafc" },
-  { id: "mac-mini", name: "Mac Mini", price: 59900, image: "/images/mac_mini.jpg", bg: "#f4f4f5" },
-  { id: "dual-monitors", name: "Dual Monitor Setup", price: 80000, image: "/images/dual-monitor.webp", bg: "#f8fafc" },
+  { id: "keyboard", name: "Mech Keyboard", price: 175, image: "/images/keyboard.webp", bg: "#f4f4f5" },
+  { id: "claude", name: "Claude Max", price: 200, image: "/images/claude-max.png", bg: "#fff7ed" },
+  { id: "airpods", name: "AirPods Pro", price: 249, image: "/images/airpods.jpeg", bg: "#f8fafc" },
+  { id: "mac-mini", name: "Mac Mini", price: 599, image: "/images/mac_mini.jpg", bg: "#f4f4f5" },
+  { id: "dual-monitors", name: "Dual Monitor Setup", price: 800, image: "/images/dual-monitor.webp", bg: "#f8fafc" },
   // Row 3 — expensive
-  { id: "iphone", name: "iPhone 16 Pro", price: 119900, image: "/images/iphone-17.jpeg", bg: "#faf5ff" },
-  { id: "macbook", name: "MacBook Pro", price: 249900, image: "/images/macbook.png", bg: "#f4f4f5" },
-  { id: "tesla", name: "Tesla Model 3", price: 3500000, image: "/images/tesla.jpeg", bg: "#fef2f2" },
-  { id: "h100", name: "NVIDIA H100", price: 3000000, image: "/images/h100.jpeg", bg: "#f0fdf4" },
-  { id: "rolex", name: "Rolex Submariner", price: 1000000, image: "/images/rolex.webp", bg: "#fefce8" },
+  { id: "iphone", name: "iPhone 16 Pro", price: 1199, image: "/images/iphone-17.jpeg", bg: "#faf5ff" },
+  { id: "macbook", name: "MacBook Pro", price: 2499, image: "/images/macbook.png", bg: "#f4f4f5" },
+  { id: "tesla", name: "Tesla Model 3", price: 35000, image: "/images/tesla.jpeg", bg: "#fef2f2" },
+  { id: "h100", name: "NVIDIA H100", price: 30000, image: "/images/h100.jpeg", bg: "#f0fdf4" },
+  { id: "rolex", name: "Rolex Submariner", price: 10000, image: "/images/rolex.webp", bg: "#fefce8" },
 ];
 
 function formatUSD(val: number): string {
